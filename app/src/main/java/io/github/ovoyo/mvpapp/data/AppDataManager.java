@@ -25,6 +25,7 @@ import io.github.ovoyo.mvpapp.data.network.model.LoginResponse;
 import io.github.ovoyo.mvpapp.data.network.model.LogoutResponse;
 import io.github.ovoyo.mvpapp.data.network.model.OpenSourceResponse;
 import io.github.ovoyo.mvpapp.data.prefs.PreferencesHelper;
+import io.github.ovoyo.mvpapp.di.ApplicationContext;
 import io.github.ovoyo.mvpapp.utils.AppConstants;
 import io.github.ovoyo.mvpapp.utils.CommonUtils;
 import io.reactivex.Observable;
@@ -41,7 +42,7 @@ public class AppDataManager implements DataManager {
     private final ApiHelper mApiHelper;
 
     @Inject
-    public AppDataManager(Context context,
+    public AppDataManager(@ApplicationContext Context context,
                           DbHelper dbHelper,
                           PreferencesHelper preferencesHelper,
                           ApiHelper apiHelper) {

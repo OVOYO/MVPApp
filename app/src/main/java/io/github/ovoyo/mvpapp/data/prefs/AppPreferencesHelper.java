@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.github.ovoyo.mvpapp.data.DataManager;
+import io.github.ovoyo.mvpapp.di.ApplicationContext;
+import io.github.ovoyo.mvpapp.di.PreferenceInfo;
 import io.github.ovoyo.mvpapp.utils.AppConstants;
 
 @Singleton
@@ -22,7 +24,7 @@ public class AppPreferencesHelper implements PreferencesHelper {
     private final SharedPreferences mPrefs;
 
     @Inject
-    public AppPreferencesHelper(Context context, String prefFileName) {
+    public AppPreferencesHelper(@ApplicationContext Context context, @PreferenceInfo String prefFileName) {
         mPrefs = context.getSharedPreferences(prefFileName, Context.MODE_PRIVATE);
     }
 

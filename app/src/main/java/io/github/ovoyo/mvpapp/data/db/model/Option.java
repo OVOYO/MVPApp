@@ -1,5 +1,8 @@
 package io.github.ovoyo.mvpapp.data.db.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
@@ -8,21 +11,33 @@ import org.greenrobot.greendao.annotation.Property;
 @Entity(nameInDb = "options")
 public class Option{
 
+    @Expose
+    @SerializedName("id")
     @Id(autoincrement = true)
     private Long id;
 
-    @Property(nameInDb = "optoion_text")
+    @Expose
+    @SerializedName("option_text")
+    @Property(nameInDb = "option_text")
     private String optionText;
 
+    @Expose
+    @SerializedName("question_id")
     @Property(nameInDb = "question_id")
     private Long questionId;
 
+    @Expose
+    @SerializedName("is_correct")
     @Property(nameInDb = "is_correct")
     private boolean isCorrect;
 
+    @Expose
+    @SerializedName("created_at")
     @Property(nameInDb = "create_at")
     private String createAt;
 
+    @Expose
+    @SerializedName("updated_at")
     @Property(nameInDb = "update_at")
     private String updateAt;
 

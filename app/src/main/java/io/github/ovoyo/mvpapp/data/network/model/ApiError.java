@@ -1,11 +1,18 @@
 package io.github.ovoyo.mvpapp.data.network.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class ApiError {
 
     private int errorCode;
 
+    @Expose
+    @SerializedName("status_code")
     private String statusCode;
 
+    @Expose
+    @SerializedName("message")
     private String message;
 
     public ApiError(int errorCode, String statusCode, String message) {

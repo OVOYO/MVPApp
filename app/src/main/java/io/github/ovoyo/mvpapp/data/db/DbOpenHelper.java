@@ -8,12 +8,14 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.github.ovoyo.mvpapp.data.db.model.DaoMaster;
+import io.github.ovoyo.mvpapp.di.ApplicationContext;
+import io.github.ovoyo.mvpapp.di.DatabaseInfo;
 
 @Singleton
 public class DbOpenHelper extends DaoMaster.OpenHelper {
 
     @Inject
-    public DbOpenHelper(Context context, String name) {
+    public DbOpenHelper(@ApplicationContext Context context, @DatabaseInfo String name) {
         super(context, name);
     }
 

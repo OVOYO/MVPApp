@@ -1,5 +1,8 @@
 package io.github.ovoyo.mvpapp.data.db.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
@@ -12,18 +15,28 @@ import java.util.List;
 @Entity(nameInDb = "questions")
 public class Question{
 
+    @Expose
+    @SerializedName("id")
     @Id
     private Long id;
 
+    @Expose
+    @SerializedName("question_text")
     @Property(nameInDb = "question_text")
     private String questionText;
 
+    @Expose
+    @SerializedName("question_img_url")
     @Property(nameInDb = "question_img_url")
     private String imgUrl;
 
+    @Expose
+    @SerializedName("created_at")
     @Property(nameInDb = "created_at")
     private String createdAt;
 
+    @Expose
+    @SerializedName("updated_at")
     @Property(nameInDb = "updated_at")
     private String updatedAt;
 
