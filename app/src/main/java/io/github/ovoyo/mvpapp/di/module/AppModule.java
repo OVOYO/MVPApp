@@ -20,6 +20,7 @@ import io.github.ovoyo.mvpapp.data.prefs.PreferencesHelper;
 import io.github.ovoyo.mvpapp.di.ApiInfo;
 import io.github.ovoyo.mvpapp.di.ApplicationContext;
 import io.github.ovoyo.mvpapp.di.DatabaseInfo;
+import io.github.ovoyo.mvpapp.di.PreferenceInfo;
 import io.github.ovoyo.mvpapp.utils.AppConstants;
 
 @Module
@@ -52,6 +53,12 @@ public class AppModule {
     @ApiInfo
     String provideApiKey() {
         return BuildConfig.API_KEY;
+    }
+
+    @Provides
+    @PreferenceInfo
+    String providePreferenceName() {
+        return AppConstants.PREF_NAME;
     }
 
     @Provides

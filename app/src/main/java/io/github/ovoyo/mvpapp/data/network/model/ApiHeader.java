@@ -6,6 +6,8 @@ import com.google.gson.annotations.SerializedName;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.github.ovoyo.mvpapp.di.ApiInfo;
+
 @Singleton
 public class ApiHeader {
 
@@ -33,7 +35,7 @@ public class ApiHeader {
         private String mApiKey;
 
         @Inject
-        public PublicApiHeader(String apiKey) {
+        public PublicApiHeader(@ApiInfo String apiKey) {
             mApiKey = apiKey;
         }
 
