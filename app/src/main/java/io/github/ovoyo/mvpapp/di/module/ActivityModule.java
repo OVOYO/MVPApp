@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import dagger.Module;
 import dagger.Provides;
 import io.github.ovoyo.mvpapp.data.network.model.BlogResponse;
+import io.github.ovoyo.mvpapp.data.network.model.OpenSourceResponse;
 import io.github.ovoyo.mvpapp.di.ActivityContext;
 import io.github.ovoyo.mvpapp.di.PerActivity;
 import io.github.ovoyo.mvpapp.ui.about.AboutMVPPresenter;
@@ -21,6 +22,10 @@ import io.github.ovoyo.mvpapp.ui.feed.blog.BlogAdapter;
 import io.github.ovoyo.mvpapp.ui.feed.blog.BlogMVPPresenter;
 import io.github.ovoyo.mvpapp.ui.feed.blog.BlogMVPView;
 import io.github.ovoyo.mvpapp.ui.feed.blog.BlogPresenter;
+import io.github.ovoyo.mvpapp.ui.feed.opensource.OpenSourceAdapter;
+import io.github.ovoyo.mvpapp.ui.feed.opensource.OpenSourceMVPPresenter;
+import io.github.ovoyo.mvpapp.ui.feed.opensource.OpenSourceMVPView;
+import io.github.ovoyo.mvpapp.ui.feed.opensource.OpenSourcePresenter;
 import io.github.ovoyo.mvpapp.ui.login.LoginMVPPresenter;
 import io.github.ovoyo.mvpapp.ui.login.LoginMVPView;
 import io.github.ovoyo.mvpapp.ui.login.LoginPresenter;
@@ -113,5 +118,15 @@ public class ActivityModule {
     @Provides
     BlogAdapter provideBlogAdapter(){
         return new BlogAdapter(new ArrayList<BlogResponse.Blog>(0));
+    }
+
+    @Provides
+    OpenSourceMVPPresenter<OpenSourceMVPView> provideOpenSourcePresenter(OpenSourcePresenter<OpenSourceMVPView> presenter){
+        return presenter;
+    }
+
+    @Provides
+    OpenSourceAdapter provideOpenSourceAdapter(){
+        return new OpenSourceAdapter(new ArrayList<OpenSourceResponse.Repo>(0));
     }
 }

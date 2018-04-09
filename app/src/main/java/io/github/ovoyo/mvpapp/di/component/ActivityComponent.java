@@ -6,6 +6,7 @@ import io.github.ovoyo.mvpapp.di.module.ActivityModule;
 import io.github.ovoyo.mvpapp.ui.about.AboutFragment;
 import io.github.ovoyo.mvpapp.ui.feed.FeedActivity;
 import io.github.ovoyo.mvpapp.ui.feed.blog.BlogFragment;
+import io.github.ovoyo.mvpapp.ui.feed.opensource.OpenSourceFragment;
 import io.github.ovoyo.mvpapp.ui.login.LoginActivity;
 import io.github.ovoyo.mvpapp.ui.main.MainActivity;
 import io.github.ovoyo.mvpapp.ui.main.rate.RateDialog;
@@ -28,5 +29,7 @@ public interface ActivityComponent {
     void inject(FeedActivity activity);
 
     void inject(BlogFragment blogFragment);
+
+    void inject(OpenSourceFragment openSourceFragment);
 
 }
