@@ -5,6 +5,7 @@ import io.github.ovoyo.mvpapp.di.PerActivity;
 import io.github.ovoyo.mvpapp.di.module.ActivityModule;
 import io.github.ovoyo.mvpapp.ui.login.LoginActivity;
 import io.github.ovoyo.mvpapp.ui.main.MainActivity;
+import io.github.ovoyo.mvpapp.ui.main.rate.RateDialog;
 import io.github.ovoyo.mvpapp.ui.splash.SplashActivity;
 
 @PerActivity
@@ -16,5 +17,7 @@ public interface ActivityComponent {
     void inject(LoginActivity activity);
 
     void inject(MainActivity activity);
+
+    void inject(RateDialog dialog);
 
 }

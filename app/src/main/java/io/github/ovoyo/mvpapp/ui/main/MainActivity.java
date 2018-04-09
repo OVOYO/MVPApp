@@ -37,6 +37,7 @@ import io.github.ovoyo.mvpapp.data.db.model.Question;
 import io.github.ovoyo.mvpapp.ui.base.BaseActivity;
 import io.github.ovoyo.mvpapp.ui.login.LoginActivity;
 import io.github.ovoyo.mvpapp.ui.main.qcard.QuestionCard;
+import io.github.ovoyo.mvpapp.ui.main.rate.RateDialog;
 import io.github.ovoyo.mvpapp.utils.ScreenUtils;
 
 public class MainActivity extends BaseActivity implements MainMVPView {
@@ -252,7 +253,7 @@ public class MainActivity extends BaseActivity implements MainMVPView {
 
     @Override
     public void showRateUsDialog() {
-
+        RateDialog.get().show(getSupportFragmentManager());
     }
 
     @Override
