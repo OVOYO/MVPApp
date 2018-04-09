@@ -65,4 +65,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
     implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+    implementation 'com.mindorks:placeholderview:0.6.1'
 }

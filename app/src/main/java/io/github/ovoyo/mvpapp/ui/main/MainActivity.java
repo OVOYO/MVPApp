@@ -3,6 +3,8 @@ package io.github.ovoyo.mvpapp.ui.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,7 +15,13 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
+
+import com.mindorks.placeholderview.SwipeDecor;
+import com.mindorks.placeholderview.SwipePlaceHolderView;
+import com.mindorks.placeholderview.listeners.ItemRemovedListener;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -28,6 +36,8 @@ import io.github.ovoyo.mvpapp.R;
 import io.github.ovoyo.mvpapp.data.db.model.Question;
 import io.github.ovoyo.mvpapp.ui.base.BaseActivity;
 import io.github.ovoyo.mvpapp.ui.login.LoginActivity;
+import io.github.ovoyo.mvpapp.ui.main.qcard.QuestionCard;
+import io.github.ovoyo.mvpapp.utils.ScreenUtils;
 
 public class MainActivity extends BaseActivity implements MainMVPView {
 
@@ -45,6 +55,9 @@ public class MainActivity extends BaseActivity implements MainMVPView {
 
     @BindView(R.id.tv_app_version)
     TextView mAppVersionTV;
+
+    @BindView(R.id.cards_container)
+    SwipePlaceHolderView mCardsContainerView;
 
     private CircleImageView mCircleImageView;
     private TextView mNameTextView;
@@ -102,7 +115,7 @@ public class MainActivity extends BaseActivity implements MainMVPView {
 
     void setupNavMenu() {
         View headerLayout = mNavigationView.getHeaderView(0);
-        mCircleImageView = headerLayout.findViewById(R.id.iv_pic);
+        mCircleImageView = headerLayout.findViewById(R.id.iv_user_pic);
         mNameTextView = headerLayout.findViewById(R.id.tv_name);
         mEmailTextView = headerLayout.findViewById(R.id.tv_email);
 
@@ -130,6 +143,27 @@ public class MainActivity extends BaseActivity implements MainMVPView {
 
     private void setupCardContainerView() {
 
+        int sWidth = ScreenUtils.getScreenWidth(this);
+        int sHeight = ScreenUtils.getScreenHeight(this);
+
+        mCardsContainerView.getBuilder()
+                .setDisplayViewCount(3)
+                .setHeightSwipeDistFactor(10F)
+                .setWidthSwipeDistFactor(5F)
+                .setSwipeDecor(new SwipeDecor()
+                        .setViewWidth((int) (0.90 * sWidth))
+                        .setViewHeight((int) (0.75 * sHeight))
+                        .setPaddingTop(20)
+                        .setSwipeRotationAngle(10)
+                        .setRelativeScale(0.01f));
+        mCardsContainerView.addItemRemoveListener(new ItemRemovedListener() {
+            @Override
+            public void onItemRemoved(int count) {
+                if (count == 0){
+                    new Handler(Looper.getMainLooper()).postDelayed(() -> mPresenter.onCardExhausted(), 800);
+                }
+            }
+        });
     }
 
     @Override
@@ -172,12 +206,27 @@ public class MainActivity extends BaseActivity implements MainMVPView {
 
     @Override
     public void refreshQuestionnaire(List<Question> questionList) {
-
+        if (questionList != null && !questionList.isEmpty()){
+            for (Question q : questionList) {
+                if (q != null && q.getOptionList() != null && q.getOptionList().size() == 3){
+                    mCardsContainerView.addView(new QuestionCard(q));
+                }
+            }
+        }
     }
 
     @Override
     public void reloadQuestionnaire(List<Question> questionList) {
+        refreshQuestionnaire(questionList);
+        ScaleAnimation animation =
+                new ScaleAnimation(
+                        1.15f, 1, 1.15f, 1,
+                        Animation.RELATIVE_TO_SELF, 0.5f,
+                        Animation.RELATIVE_TO_SELF, 0.5f);
 
+        mCardsContainerView.setAnimation(animation);
+        animation.setDuration(100);
+        animation.start();
     }
 
     @Override
