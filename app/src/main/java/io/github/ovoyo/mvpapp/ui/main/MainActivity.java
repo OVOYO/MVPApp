@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -34,6 +36,7 @@ import butterknife.ButterKnife;
 import io.github.ovoyo.mvpapp.BuildConfig;
 import io.github.ovoyo.mvpapp.R;
 import io.github.ovoyo.mvpapp.data.db.model.Question;
+import io.github.ovoyo.mvpapp.ui.about.AboutFragment;
 import io.github.ovoyo.mvpapp.ui.base.BaseActivity;
 import io.github.ovoyo.mvpapp.ui.login.LoginActivity;
 import io.github.ovoyo.mvpapp.ui.main.qcard.QuestionCard;
@@ -160,7 +163,7 @@ public class MainActivity extends BaseActivity implements MainMVPView {
         mCardsContainerView.addItemRemoveListener(new ItemRemovedListener() {
             @Override
             public void onItemRemoved(int count) {
-                if (count == 0){
+                if (count == 0) {
                     new Handler(Looper.getMainLooper()).postDelayed(() -> mPresenter.onCardExhausted(), 800);
                 }
             }
@@ -201,15 +204,36 @@ public class MainActivity extends BaseActivity implements MainMVPView {
     }
 
     @Override
-    public void showAboutFragment() {
+    public void onFragmentDetached(String tag) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment = fragmentManager.findFragmentByTag(tag);
+        if (fragment != null) {
+            fragmentManager
+                    .beginTransaction()
+                    .disallowAddToBackStack()
+                    .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
+                    .remove(fragment)
+                    .commitNow();
+            unlockDrawer();
+        }
+    }
 
+    @Override
+    public void showAboutFragment() {
+        lockDrawer();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .disallowAddToBackStack()
+                .setCustomAnimations(R.anim.slide_left, R.anim.slide_right)
+                .add(R.id.cl_root_view, AboutFragment.get(), AboutFragment.TAG)
+                .commit();
     }
 
     @Override
     public void refreshQuestionnaire(List<Question> questionList) {
-        if (questionList != null && !questionList.isEmpty()){
+        if (questionList != null && !questionList.isEmpty()) {
             for (Question q : questionList) {
-                if (q != null && q.getOptionList() != null && q.getOptionList().size() == 3){
+                if (q != null && q.getOptionList() != null && q.getOptionList().size() == 3) {
                     mCardsContainerView.addView(new QuestionCard(q));
                 }
             }

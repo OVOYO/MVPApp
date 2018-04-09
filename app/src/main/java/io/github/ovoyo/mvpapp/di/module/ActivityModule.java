@@ -7,6 +7,9 @@ import dagger.Module;
 import dagger.Provides;
 import io.github.ovoyo.mvpapp.di.ActivityContext;
 import io.github.ovoyo.mvpapp.di.PerActivity;
+import io.github.ovoyo.mvpapp.ui.about.AboutMVPPresenter;
+import io.github.ovoyo.mvpapp.ui.about.AboutMVPView;
+import io.github.ovoyo.mvpapp.ui.about.AboutPresenter;
 import io.github.ovoyo.mvpapp.ui.login.LoginMVPPresenter;
 import io.github.ovoyo.mvpapp.ui.login.LoginMVPView;
 import io.github.ovoyo.mvpapp.ui.login.LoginPresenter;
@@ -73,6 +76,11 @@ public class ActivityModule {
 
     @Provides
     RateDialogMVPPresenter<RateDialogMVPView> provideRateDialogPresenter(RateDialogPresenter<RateDialogMVPView> presenter){
+        return presenter;
+    }
+
+    @Provides
+    AboutMVPPresenter<AboutMVPView> provideAboutPresenter(AboutPresenter<AboutMVPView> presenter){
         return presenter;
     }
 }

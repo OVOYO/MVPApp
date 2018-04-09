@@ -38,7 +38,7 @@ public abstract class BaseFragment extends Fragment implements MVPView {
         setup(view);
     }
 
-    abstract void setup(View view);
+    public abstract void setup(View view);
 
     @Override
     public void onAttach(Context context) {
