@@ -41,6 +41,18 @@
                   android:launchMode="singleTop"
                   android:screenOrientation="portrait">
         </activity>
+        <activity
+                android:name=".ui.feed.FeedActivity"
+                android:launchMode="singleTop"
+                android:screenOrientation="portrait"
+                android:theme="@style/AppTheme.NoActionBar"
+                android:parentActivityName=".ui.main.MainActivity">
+
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ui.main.MainActivity"/>
+
+        </activity>
     </application>
 
 </manifest>

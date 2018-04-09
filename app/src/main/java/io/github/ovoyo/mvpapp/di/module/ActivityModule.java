@@ -10,6 +10,10 @@ import io.github.ovoyo.mvpapp.di.PerActivity;
 import io.github.ovoyo.mvpapp.ui.about.AboutMVPPresenter;
 import io.github.ovoyo.mvpapp.ui.about.AboutMVPView;
 import io.github.ovoyo.mvpapp.ui.about.AboutPresenter;
+import io.github.ovoyo.mvpapp.ui.feed.FeedMVPPresenter;
+import io.github.ovoyo.mvpapp.ui.feed.FeedMVPView;
+import io.github.ovoyo.mvpapp.ui.feed.FeedPagerAdapter;
+import io.github.ovoyo.mvpapp.ui.feed.FeedPresenter;
 import io.github.ovoyo.mvpapp.ui.login.LoginMVPPresenter;
 import io.github.ovoyo.mvpapp.ui.login.LoginMVPView;
 import io.github.ovoyo.mvpapp.ui.login.LoginPresenter;
@@ -82,5 +86,15 @@ public class ActivityModule {
     @Provides
     AboutMVPPresenter<AboutMVPView> provideAboutPresenter(AboutPresenter<AboutMVPView> presenter){
         return presenter;
+    }
+
+    @Provides
+    FeedMVPPresenter<FeedMVPView> provideFeedPresenter(FeedPresenter<FeedMVPView> presenter){
+        return presenter;
+    }
+
+    @Provides
+    FeedPagerAdapter provideFeedPageAdapter(AppCompatActivity activity){
+        return new FeedPagerAdapter(activity.getSupportFragmentManager());
     }
 }

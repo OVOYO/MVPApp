@@ -4,6 +4,7 @@ import dagger.Component;
 import io.github.ovoyo.mvpapp.di.PerActivity;
 import io.github.ovoyo.mvpapp.di.module.ActivityModule;
 import io.github.ovoyo.mvpapp.ui.about.AboutFragment;
+import io.github.ovoyo.mvpapp.ui.feed.FeedActivity;
 import io.github.ovoyo.mvpapp.ui.login.LoginActivity;
 import io.github.ovoyo.mvpapp.ui.main.MainActivity;
 import io.github.ovoyo.mvpapp.ui.main.rate.RateDialog;
@@ -22,5 +23,7 @@ public interface ActivityComponent {
     void inject(RateDialog dialog);
 
     void inject(AboutFragment fragment);
+
+    void inject(FeedActivity activity);
 
 }
