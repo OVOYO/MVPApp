@@ -3,8 +3,11 @@ package io.github.ovoyo.mvpapp.di.module;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 import dagger.Module;
 import dagger.Provides;
+import io.github.ovoyo.mvpapp.data.network.model.BlogResponse;
 import io.github.ovoyo.mvpapp.di.ActivityContext;
 import io.github.ovoyo.mvpapp.di.PerActivity;
 import io.github.ovoyo.mvpapp.ui.about.AboutMVPPresenter;
@@ -14,6 +17,10 @@ import io.github.ovoyo.mvpapp.ui.feed.FeedMVPPresenter;
 import io.github.ovoyo.mvpapp.ui.feed.FeedMVPView;
 import io.github.ovoyo.mvpapp.ui.feed.FeedPagerAdapter;
 import io.github.ovoyo.mvpapp.ui.feed.FeedPresenter;
+import io.github.ovoyo.mvpapp.ui.feed.blog.BlogAdapter;
+import io.github.ovoyo.mvpapp.ui.feed.blog.BlogMVPPresenter;
+import io.github.ovoyo.mvpapp.ui.feed.blog.BlogMVPView;
+import io.github.ovoyo.mvpapp.ui.feed.blog.BlogPresenter;
 import io.github.ovoyo.mvpapp.ui.login.LoginMVPPresenter;
 import io.github.ovoyo.mvpapp.ui.login.LoginMVPView;
 import io.github.ovoyo.mvpapp.ui.login.LoginPresenter;
@@ -96,5 +103,15 @@ public class ActivityModule {
     @Provides
     FeedPagerAdapter provideFeedPageAdapter(AppCompatActivity activity){
         return new FeedPagerAdapter(activity.getSupportFragmentManager());
+    }
+
+    @Provides
+    BlogMVPPresenter<BlogMVPView> provideBlogPresenter(BlogPresenter<BlogMVPView> presenter){
+        return presenter;
+    }
+
+    @Provides
+    BlogAdapter provideBlogAdapter(){
+        return new BlogAdapter(new ArrayList<BlogResponse.Blog>(0));
     }
 }
