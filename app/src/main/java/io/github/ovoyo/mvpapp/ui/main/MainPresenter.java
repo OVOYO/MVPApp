@@ -120,8 +120,8 @@ public class MainPresenter<V extends MainMVPView> extends BasePresenter<V> imple
         }
 
         String curPic = getDataManager().getCurrentUserProfilePicUrl();
-        if (!TextUtils.isEmpty(curPic)) {
+//        if (!TextUtils.isEmpty(curPic)) {
             getMVPView().updateUserProfilePic(curPic);
-        }
+//        }
     }
 }

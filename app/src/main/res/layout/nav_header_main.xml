@@ -19,8 +19,7 @@
             android:contentDescription="@null"
             android:scaleType="centerCrop"
             app:civ_border_width="2dp"
-            app:civ_border_color="#FFFFFFFF"
-            android:src="@mipmap/ic_launcher"/>
+            app:civ_border_color="#FFFFFFFF"/>
 
     <TextView
             style="@style/TextStyle.Title"

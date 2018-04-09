@@ -13,6 +13,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,6 +22,7 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.mindorks.placeholderview.listeners.ItemRemovedListener;
@@ -267,7 +269,11 @@ public class MainActivity extends BaseActivity implements MainMVPView {
 
     @Override
     public void updateUserProfilePic(String currentUserProfilePicUrl) {
-
+        Glide
+                .with(this)
+                .load("https://pic3.zhimg.com/80/v2-e2ae9159cf260da0ae61951bf1926abe.jpg")
+                .asBitmap()
+                .into(mCircleImageView);
     }
 
     @Override
